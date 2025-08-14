@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../lib/axios";
 import { toast } from "react-hot-toast";
 
 function EditNote() {
@@ -16,7 +16,7 @@ function EditNote() {
   useEffect(() => {
     const fetchNote = async () => {
       try {
-        const res = await axios.get(`http://localhost:5001/api/notes/${id}`);
+        const res = await api.get(`/notes/${id}`);
         setTitle(res.data.title);
         setContent(res.data.content);
       } catch (error) {
@@ -35,7 +35,7 @@ function EditNote() {
     e.preventDefault();
     setSaving(true);
     try {
-      await axios.put(`http://localhost:5001/api/notes/${id}`, {
+      await api.put(`/notes/${id}`, {
         title,
         content,
       });

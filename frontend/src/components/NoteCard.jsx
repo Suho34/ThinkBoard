@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { PenSquare, Trash2 } from "lucide-react";
-import axios from "axios";
+import api from "../lib/axios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
@@ -16,7 +16,7 @@ function NoteCard({ note, setNotes }) {
     try {
       setLoading(true);
 
-      const res = await axios.delete(`http://localhost:5001/api/notes/${id}`);
+      const res = await api.delete(`/notes/${id}`);
 
       // If successful
       toast.success(res.data.message || "Note deleted successfully!");
